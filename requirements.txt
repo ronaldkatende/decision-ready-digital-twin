@@ -1,0 +1,11 @@
+numpy>=2.0,<3
+scipy>=1.13
+pandas>=2.0
+matplotlib>=3.8
+scikit-learn>=1.5
+requests>=2.31
+cvxpy>=1.5
+clarabel>=0.9
+scs>=3.2
+pandapower>=3.0
+wntr>=1.3

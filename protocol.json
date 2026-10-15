@@ -1,0 +1,58 @@
+{
+  "protocol_version": "1.0",
+  "frozen_before_production_results": true,
+  "random_seed": 20260902,
+  "domains": [
+    "CIGRE MV electrical distribution with DER",
+    "EPA EPANET Net3 water distribution",
+    "six-storey structural dynamics benchmark",
+    "four-state electrothermal benchmark"
+  ],
+  "experiments": {
+    "E1": {
+      "name": "Exact minimax identity",
+      "pass_rule": "all tested observable subsets have relative identity error < 1e-8"
+    },
+    "E2": {
+      "name": "Bounded scalar ambiguity",
+      "pass_rule": "SOCP minimax and half-witness gap differ by < 2e-5"
+    },
+    "E3": {
+      "name": "No-compensation",
+      "models": [
+        "ridge",
+        "random_forest",
+        "hist_gradient_boosting",
+        "small_mlp"
+      ],
+      "pass_rule": "no half-gap lower-bound violation under bad sensing"
+    },
+    "E4": {
+      "name": "Equal count unequal information",
+      "restriction": "sensor cardinality is held exactly fixed within each domain"
+    },
+    "E5": {
+      "name": "Gaussian propagation",
+      "pass_rule": "at least 90% of tested configurations are within 10% of the theoretical MSE"
+    },
+    "E6": {
+      "name": "Task-projected learning",
+      "feature_map": "fixed bounded tanh random feature map",
+      "pass_rule": "no excess-risk certificate violation; no Rademacher violation beyond 3% Monte-Carlo allowance"
+    },
+    "E7": {
+      "name": "Sensor-resource frontier",
+      "pass_rule": "SVD-whitened primal and dual are feasible; certified dual lower bound <= exact binary optimum <= feasible rounded cost; task residual <= 1e-10"
+    },
+    "E8": {
+      "name": "Nonlinear locality stress",
+      "pass_rule": "none; adverse results are retained and reported"
+    }
+  },
+  "anti_cherry_picking": [
+    "Do not remove a declared domain because its result is unfavorable.",
+    "Do not change pass thresholds after production results.",
+    "Do not retune the operating envelope merely to improve a plot.",
+    "A failed declared domain remains visible in the run logs and a full run returns a nonzero status."
+  ]
+}
